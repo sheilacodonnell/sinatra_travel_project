@@ -1,6 +1,6 @@
-class CreateCities < ActiveRecord::Migration
+class CreateTrips < ActiveRecord::Migration
   def change
-    create_table :cities do |t|
+    create_table :trips do |t|
       t.string :city
       t.integer :user_id
     end
