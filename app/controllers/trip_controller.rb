@@ -1,74 +1,68 @@
-class CityController < ApplicationController
+class TripController < ApplicationController
 
-  get '/cities' do
+  get '/trips' do
     if !logged_in?
       redirect to '/login'
     else
       @user = current_user
-      @tweets = City.all
-      erb :'/cities/cities'
+      @trip= Trip.all
+      erb :'/trips/trips'
     end
   end
 
-  get '/tweets/new' do
+  get '/trips/new' do
     if !logged_in?
       redirect to '/login'
     else
-      erb :'/tweets/create_tweet'
+      erb :'/trips/create_trip'
     end
   end
 
-  post '/tweets' do
+  post '/trips' do
     if params[:content] == ""
-      redirect to "/tweets/new"
+      redirect to "/trips/new"
     else
-      @tweet = current_user.tweets.create(content: params[:content])
-      redirect to "/tweets/#{@tweet.id}"
+      @trip = current_user.trip.create(interests: params[:interests])
+      redirect to "/trips/#{@trip.id}"
     end
   end
 
-  get '/tweets/:id' do
+  get '/trips/:id' do
     if !logged_in?
       redirect to '/login'
     else
-      @tweet = Tweet.find_by_id(params[:id])
-      erb :'tweets/show_tweet'
+      @trip = Trip.find_by_id(params[:id])
+      erb :'trips/show_trip'
     end
   end
 
-  get '/tweets/:id/edit' do
+  get '/trips/:id/edit' do
     if !logged_in?
       redirect to '/login'
     else
-      @tweet = Tweet.find_by_id(params[:id])
-      # if @tweet.user_id == session[:user_id]
-        erb :'/tweets/edit_tweet'
-      # else
-      #   redirect to '/tweets'
-      # end
+      @trip = rip.find_by_id(params[:id])
+        erb :'/trips/edit_trip'
     end
   end
 
-  patch '/tweets/:id' do #see sinatra-restful-routes-lab-v-000
-    @tweet = Tweet.find_by_id(params[:id])
-    @tweet.update(content: params[:content])
-    if @tweet.save
-    #   redirect to "/tweets/#{@tweet.id}"
-    # else
-      redirect to "/tweets/#{@tweet.id}/edit"
+  patch '/trips/:id' do
+    @trip = Trip.find_by_id(params[:id])
+    @trip.update(content: params[:content])
+    if @trip.save
+      redirect to "/trips/#{@trip.id}/edit"
     end
   end
 
-  delete '/tweets/:id/delete' do
+  delete '/trips/:id/delete' do
     if !logged_in?
       redirect to '/login'
     else
-      @tweet = Tweet.find_by(params[:id])
-      if current_user.id == @tweet.user_id
-        @tweet.delete
-        redirect to '/tweets'
+      @trip = Trip.find_by(params[:id])
+      if current_user.id == @trip.user_id
+        @trip.delete
+        redirect to '/trips'
       else
-        redirect to "/tweets"
+        redirect to "/trips"
       end
     end
   end
