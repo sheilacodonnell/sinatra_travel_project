@@ -52,10 +52,8 @@
 # # end
 # end
 
-# require 'rack-flash'
 
 class UsersController < ApplicationController
-#use Rack::Flash
 
   get '/login' do
     if !logged_in?
@@ -92,11 +90,11 @@ class UsersController < ApplicationController
     end
   end
 
-  post '/signup' do #check validation before submitting
+  post '/signup' do
     @user = User.new(username: params[:username], email: params[:email], password: params[:password])
     if @user.save
       session[:user_id] = @user.id
-      redirect to '/trips/new'
+      redirect to '/trips/trips'
     else
       redirect to '/signup'
     end

@@ -6,6 +6,6 @@ end
 
 use Rack::MethodOverride
 # use GolfClubsController
-# use GolfBagsController
+use TripController
 use UsersController
 run ApplicationController

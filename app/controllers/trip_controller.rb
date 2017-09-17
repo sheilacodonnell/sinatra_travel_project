@@ -4,8 +4,8 @@ class TripController < ApplicationController
     if !logged_in?
       redirect to '/login'
     else
-      @user = current_user
-      @trip= Trip.all
+      # @user = current_user
+      @trips = Trips.all
       erb :'/trips/trips'
     end
   end
@@ -22,8 +22,8 @@ class TripController < ApplicationController
     if params[:content] == ""
       redirect to "/trips/new"
     else
-      @trip = current_user.trip.create(interests: params[:interests])
-      redirect to "/trips/#{@trip.id}"
+      @trips = current_user.trip.create(interests: params[:interests])
+      redirect to "/trips/#{@trips.id}"
     end
   end
 
@@ -31,7 +31,7 @@ class TripController < ApplicationController
     if !logged_in?
       redirect to '/login'
     else
-      @trip = Trip.find_by_id(params[:id])
+      @trips = Trip.find_by_id(params[:id])
       erb :'trips/show_trip'
     end
   end
@@ -40,7 +40,7 @@ class TripController < ApplicationController
     if !logged_in?
       redirect to '/login'
     else
-      @trip = rip.find_by_id(params[:id])
+      @trips = rip.find_by_id(params[:id])
         erb :'/trips/edit_trip'
     end
   end
