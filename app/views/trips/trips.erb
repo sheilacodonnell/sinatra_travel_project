@@ -1,5 +1,14 @@
-Welcome,
+<h2> Hi!</h2>
+<br>
+<h2>View your existing trips below, or <a href ="/trips/new"> click here to create a new trip.</h2>
 
+<h3>Here Are All Of Your Trips:</h3>
+<br>
 <% @trips.each do |trip| %>
-  <%= trip %>
+  <div>
+
+    <p>City:<%= trip.city %></a></p>
+    <p>Interests:<%= trip.interests %></a></p>  </div>
+    <p>Notes:<%= trip.notes %></a></p>  </div>
+
 <% end %>

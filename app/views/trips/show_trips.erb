@@ -1,8 +1,10 @@
-<p><%= @trips.trip_name %>
+<% @trips.each do |trip| %>
+  <%= trip.trip_name %>
+<% end %>
+
+
 
 <form method="post" action="/trips/<%=@trip.id%>/delete">
   <input id="hidden" type="hidden" name="_method" value="DELETE">
   <input type="submit" value="Delete Trip">
 </form>
-
-<a href="/trips/<%=@trip.id%>/edit">Edit Trip </a>
