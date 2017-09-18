@@ -19,33 +19,6 @@ class TripController < ApplicationController
   end
 
 
- get '/trips/:id/edit' do #load edit form
-    if logged_in?
-      @trip = Trips.find_by_id(params[:id])
-      if @trip.user_id == current_user.id
-        erb :'/trips/edit'
-      else
-        redirect to '/trips'
-      end
-    else
-      redirect to '/login'
-    end
-  end
-
-  patch '/trips/:id' do #edit action
-    @trip = Trips.find_by_id(params[:trips_id])
-    @trip.update(interests: params[:interests])
-    redirect to "/trips/#{@trip.id}"
-  end
-
-  get '/trips/:id' do
-    if logged_in?
-     @trip = Trips.find_by_id(params[:trips_id])
-     redirect to '/interests'
-   else
-     redirect to "/login"
-   end
-  end
 
  # post '/trips' do
  #   if params[:trip_name] == ""
@@ -66,22 +39,44 @@ class TripController < ApplicationController
 
 
  get '/trips/:id' do
-   @trip = Trips.find_by_id(param[:id])
-   erb :'trips/edit'
+   @trip = Trips.find(params[:id])
+   erb :'trips/show_trips'
  end
 
-  delete '/trips/:id/delete' do
-    if logged_in?
-      @trip = Trips.find(params[:id])
-      if @trip.user_id == current_user.id
-        @trip.delete
-        redirect to '/trips'
-      else
-        redirect to '/trips'
-      end
-    else
-      redirect to '/login'
-    end
+
+ 	get '/trips/:id/edit' do
+ 		@trip = Trips.find(params[:id])
+ 		erb :'/trips/edit'
+ 	end
+
+  patch '/trips/:id' do #edit action
+   @trip = Trips.find(params[:id])
+   @trip.update(city: params[:city], interests: params[:interests], notes: params[:notes])
+  #  @trip.save
+   redirect to "/trips/#{@trip.id}"
  end
 
-end #end controller
+
+ #
+ #   delete '/trips/:id/delete' do
+ #     @trip = Trips.find(params[:id])
+ #     if current_user.id == @trip.user_id
+ #       @trip.delete
+ #       redirect '/trips/trips'
+ #     else
+ #       redirect "/login"
+ #     end
+ #   end
+ # end
+
+ delete '/trips/:id' do
+  if !logged_in? && !current_user
+    redirect to '/login'
+  else
+    @trip = Trips.find_by_id(params[:id])
+    @trip.delete
+    redirect'/trips'
+
+  end
+end
+end

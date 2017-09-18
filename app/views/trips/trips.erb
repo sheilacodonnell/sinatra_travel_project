@@ -7,7 +7,8 @@
 <% @trips.each do |trip| %>
   <div>
 
-    <p>City:<%= trip.city %></a></p>
+    <li>City: <a href="/trips/<%=trip.id%>"><%= trip.city %></a></li>
+
     <p>Interests:<%= trip.interests %></a></p>  </div>
     <p>Notes:<%= trip.notes %></a></p>  </div>
 

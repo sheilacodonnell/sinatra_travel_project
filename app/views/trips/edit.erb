@@ -1,12 +1,16 @@
 <h2>Edit Your Trip</h2>
 
-<form method="post" action="/trips/<%= @trip.id %>">
-  <input id="hidden" type="hidden" name="_method" value="patch">
+<form action="/trips/<%= @trip.id %>" method="post">
+  <input type="hidden" id="hidden" name="_method" value="patch">
 
-  <label>City:</label> <input type="text" name="trip_name" value="<%= @trip.trip_name %>" />
-  <br /><br />
-  <label>Interests:</label> <input type="test" name="location" value="<%= @trip.interests %>"/>
+  <p>City: <br> <input type="text" name="city" value="<%= @trip.city %>" />
+  <p>What are you interested in? <br> <input type="text" name="interests" value="<%= @trip.interests %>"/>
 
 
-  <input type="submit" value="Submit Changes">
-</form>
+
+  <p>Tell us more about you:</p>
+  <input type="text" name="notes" value="<%= @trip.notes %>"/>
+
+
+  <input class="btn btn-primary" type="submit" value="submit">
+  </form>
