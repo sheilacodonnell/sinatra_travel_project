@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     @user = User.create(username: params[:username], email: params[:email], password: params[:password])
     @user.save
      session[:user_id] = @user.id
-      redirect '/trips/new'
+      redirect '/trips'
     end
   end
 
@@ -45,14 +45,18 @@ class UsersController < ApplicationController
       redirect '/'
     end
   end
-
-  get '/users/:slug' do # user show page
-    @user = User.find_by_slug(params[:slug])
-    @trips = @user.trips
-    erb :'/users/show'
-  end
-
 end
+
+  # get '/users/show' do # user show page
+  #   # @user = User.find_by_slug(params[:slug])
+  #   @user = User.find(session[:id])
+  #
+  #   @trip = @user.trips
+  #
+  #   erb :'/trips/trips'
+  # end
+
+
 
 # class UsersController < ApplicationController
 #
