@@ -1,3 +1,4 @@
+
 require './config/environment'
 
 class ApplicationController < Sinatra::Base
@@ -6,7 +7,7 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-    set :session_secret, "password_security"
+    set :session_secret, "top_secret"
   end
 
   get '/' do
@@ -14,13 +15,13 @@ class ApplicationController < Sinatra::Base
   end
 
   helpers do
-    def logged_in?
-      !!session[:user_id]
-    end
+     def logged_in?(session)
+       !!session[:user_id]
+     end
 
-    def current_user
-      User.find(session[:user_id])
-    end
-  end
+     def current_user(session)
+       User.find(session[:user_id])
+     end
+   end
 
-end
+ end

@@ -1,15 +1,15 @@
 <h2> Hi!</h2>
 <br>
-<h2>View your existing trips below, or <a href ="/trips/new"> click here to create a new trip.</h2>
+<h2>View your existing trips below, or <a href ="/trips/new"> click here to create a new trip.</h2></a>
 
 <h3>Here Are All Of Your Trips:</h3>
 <br>
 <% @trips.each do |trip| %>
-  <div>
-
-    <li>City: <a href="/trips/<%=trip.id%>"><%= trip.city %></a></li>
-
-    <p>Interests:<%= trip.interests %></a></p>  </div>
-    <p>Notes:<%= trip.notes %></a></p>  </div>
+    <li>City:<a href="/trips/<%=trip.id%>"><%= trip.city %></a></li>
 
 <% end %>
+
+
+<form method="get" action="/logout" class="text-center buttons">
+			<button type="submit">Logout</button>
+		</form>
