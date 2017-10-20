@@ -1,4 +1,5 @@
-<h2> Hi!</h2>
+<h1>Hello, <%=current_user(session).username%>!</h1>
+
 <br>
 <h2>View your existing trips below, or <a href ="/trips/new"> click here to create a new trip.</h2></a>
 
@@ -8,7 +9,6 @@
     <li>City:<a href="/trips/<%=trip.id%>"><%= trip.city %></a></li>
 
 <% end %>
-
 
 <form method="get" action="/logout" class="text-center buttons">
 			<button type="submit">Logout</button>

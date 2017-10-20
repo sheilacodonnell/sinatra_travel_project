@@ -2,11 +2,8 @@ class TripController < ApplicationController
 
   get '/trips' do
     if logged_in?(session)
-      # @user = User.find(session[:user_id])
       user = current_user(session)
-
-      @trips = Trips.all
-      # (!--using this as a placeholder. it brings up all trips created, regardless of user)
+      @trips = Trips.where(user_id: user.id)
       # @trips = @user.trips.all why doesnt this work? uninitialized constant User::Trip error
       erb :'trips/trips'
     else
